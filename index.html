@@ -1,0 +1,1082 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Interest Calculator</title>
+    <style>  
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    background: #c4d1eb;
+    color: #222;
+    min-height: 100vh;
+}
+/* HEADER */
+.header {
+    background: rgb(240, 241, 241);
+    border-bottom: 1px solid #e5e5e5;
+}
+.header-content {
+    max-width: 1100px;
+    margin: auto;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header h1 {
+    font-size: 25px;
+}
+#language {
+    padding: 9px 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+/* MAIN */
+.main-container {
+    max-width: 1100px;
+    margin: 45px auto;
+    padding: 0 20px;
+}
+/* CARD */
+.calculator-card {
+    background: white;
+    border-radius: 14px;
+    padding: 35px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 45px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+/* LEFT SIDE */
+.calculator-left h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+.description {
+    color: #6816bf;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 28px;
+}
+/* FORM */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+.form-group input {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d5d5d5;
+    border-radius: 8px;
+    font-size: 15px;
+    outline: none;
+    background: white;
+}
+.form-group input:focus {
+    border-color: #555;
+}
+/* MONTHLY INTEREST */
+.input-with-symbol {
+    position: relative;
+}
+.input-with-symbol input {
+    padding-right: 40px;
+}
+.input-with-symbol span {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-size: 15px;
+}
+/* BUTTONS */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+button {
+    border: none;
+    border-radius: 8px;
+    padding: 13px 20px;
+    font-size: 15px;
+    cursor: pointer;
+}
+.calculate-button {
+    flex: 1;
+    background: #222;
+    color: white;
+}
+.calculate-button:hover {
+    background: #000;
+}
+.reset-button {
+    background: #eeeeee;
+    color: #333;
+}
+.reset-button:hover {
+    background: #e2e2e2;
+}
+/* ERROR */
+.error {
+    color: #d93025;
+    font-size: 14px;
+    margin-top: 15px;
+}
+/* RIGHT SIDE */
+.right-side {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+/* RESULT */
+.result-area {
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 25px;
+}
+.result-area h2,
+.explanation-area h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+.result-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #eeeeee;
+}
+.result-item:last-child {
+    border-bottom: none;
+}
+.result-item span {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+.result-item strong {
+    display: block;
+    font-size: 25px;
+    word-break: break-word;
+}
+.result-item small {
+    display: block;
+    color: #777;
+    margin-top: 7px;
+    font-size: 13px;
+}
+.total-result strong {
+    font-size: 28px;
+}
+.interest-note {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #cc3f3f;
+    line-height: 1.5;
+}
+/* EXPLANATION */
+.explanation-area {
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 25px;
+}
+#explanation {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+#explanation p {
+    margin-bottom: 10px;
+    color: #0f0201;
+}
+
+#explanation .formula {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 7px;
+    margin: 12px 0;
+
+    font-weight: 600;
+    word-break: break-word;
+}
+
+
+/* HIDDEN */
+
+.hidden {
+    display: none;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+    .header-content {
+        padding: 15px;
+    }
+
+    .header h1 {
+        font-size: 21px;
+    }
+
+    #language {
+        padding: 8px 9px;
+        font-size: 13px;
+    }
+
+    .main-container {
+        margin: 20px auto;
+        padding: 0 12px;
+    }
+
+    .calculator-card {
+        grid-template-columns: 1fr;
+        gap: 25px;
+
+        padding: 22px 18px;
+        border-radius: 12px;
+    }
+
+    .calculator-left h2 {
+        font-size: 21px;
+    }
+
+    .description {
+        margin-bottom: 22px;
+        color: #031e4a;
+    }
+
+    .form-group {
+        margin-bottom: 17px;
+    }
+
+    .form-group input {
+        padding: 13px;
+        font-size: 16px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+    }
+
+    .result-area,
+    .explanation-area {
+        padding: 20px;
+    }
+
+    .result-item strong {
+        font-size: 22px;
+    }
+
+    .total-result strong {
+        font-size: 25px;
+    }
+
+    #explanation {
+        font-size: 14px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="header-content">
+        <h1>SI Calculator</h1>
+
+        <select id="language">
+            <option value="en">English</option>
+            <option value="te">తెలుగు</option>
+        </select>
+    </div>
+</header>
+
+<main class="main-container">
+
+    <section class="calculator-card">
+
+        <!-- LEFT: INPUTS -->
+        <div class="calculator-left">
+
+            <h2 id="title">Simple Interest Calculator</h2>
+
+            <p id="description" class="description">
+                Calculate interest based on completed months between two dates.
+            </p>
+
+            <div class="form-group">
+                <label id="principalLabel" for="principal">
+                    Principal Amount
+                </label>
+
+                <input
+                    type="number"
+                    id="principal"
+                    placeholder="Enter principal amount"
+                    min="0"
+                    step="0.01"
+                >
+            </div>
+
+            <div class="form-group">
+                <label id="monthlyInterestLabel" for="monthlyInterest">
+                    Monthly Interest
+                </label>
+
+                <div class="input-with-symbol">
+                    <input
+                        type="number"
+                        id="monthlyInterest"
+                        placeholder="Enter monthly interest"
+                        min="0"
+                        step="0.01"
+                    >
+                    <span>₹</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label id="givenDateLabel" for="givenDate">
+                    Money Given Date
+                </label>
+
+                <input type="date" id="givenDate">
+            </div>
+
+            <div class="form-group">
+                <label id="returnDateLabel" for="returnDate">
+                    Money Return Date
+                </label>
+
+                <input type="date" id="returnDate">
+            </div>
+
+            <div class="button-group">
+                <button id="calculateButton" class="calculate-button">
+                    Calculate
+                </button>
+
+                <button id="resetButton" class="reset-button">
+                    Reset
+                </button>
+            </div>
+
+            <p id="error" class="error"></p>
+
+        </div>
+
+
+        <!-- RIGHT: RESULTS -->
+        <div class="right-side">
+
+            <div id="resultArea" class="result-area hidden">
+
+                <h2 id="resultTitle">Result</h2>
+
+                <div class="result-item duration-result">
+                    <span id="durationLabel">Duration</span>
+
+                    <strong id="duration">-</strong>
+
+                    <small id="actualDays">-</small>
+                </div>
+
+                <div class="result-item">
+                    <span id="interestLabel">Interest</span>
+
+                     <strong id="interest">₹0.00</strong>
+
+                     <p id="interestNote" class="interest-note"></p>
+                </div>
+
+                <div class="result-item total-result">
+                    <span id="totalLabel">Total Amount</span>
+
+                    <strong id="totalAmount">₹0.00</strong>
+                </div>
+
+            </div>
+
+
+            <!-- EXPLANATION -->
+            <div id="explanationArea" class="explanation-area hidden">
+
+                <h2 id="explanationTitle">
+                    Explanation
+                </h2>
+
+                <div id="explanation"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+   
+const languageSelect = document.getElementById("language");
+
+const principalInput = document.getElementById("principal");
+const monthlyInterestInput = document.getElementById("monthlyInterest");
+
+const givenDateInput = document.getElementById("givenDate");
+const returnDateInput = document.getElementById("returnDate");
+
+const calculateButton = document.getElementById("calculateButton");
+const resetButton = document.getElementById("resetButton");
+
+const resultArea = document.getElementById("resultArea");
+const explanationArea = document.getElementById("explanationArea");
+
+const errorElement = document.getElementById("error");
+
+const durationElement = document.getElementById("duration");
+const actualDaysElement = document.getElementById("actualDays");
+
+const interestElement = document.getElementById("interest");
+const interestNoteElement = document.getElementById("interestNote");
+const totalAmountElement = document.getElementById("totalAmount");
+
+const explanationElement = document.getElementById("explanation");
+
+
+/* TRANSLATIONS */
+
+const translations = {
+
+    en: {
+        title: "Simple Interest Calculator",
+
+        description:
+            "Calculate interest based on completed months between two dates.",
+
+        principalLabel: "Principal Amount",
+
+        monthlyInterestLabel:
+            "Monthly Interest",
+
+        principalPlaceholder:
+            "Enter principal amount",
+
+        monthlyInterestPlaceholder:
+            "Enter monthly interest",
+
+        givenDateLabel:
+            "Money Given Date",
+
+        returnDateLabel:
+            "Money Return Date",
+
+        calculateButton:
+            "Calculate",
+
+        resetButton:
+            "Reset",
+
+        resultTitle:
+            "Result",
+
+        durationLabel:
+            "Duration",
+
+        interestLabel:
+            "Interest",
+
+        totalLabel:
+            "Total Amount",
+
+        explanationTitle:
+            "Explanation",
+
+        actualDays:
+            "Actual elapsed days",
+
+        completedMonths:
+            "Completed months",
+
+        extraDays:
+            "Extra days",
+
+        interestCalculation:
+            "Interest Calculation",
+
+        totalCalculation:
+            "Total Amount Calculation",
+        interestNoteLessThanMonth:
+            "No interest calculated because the duration is less than 1 completed month.",
+
+        interestNoteExtraDays:
+             "Interest is calculated for completed months only. Extra days do not generate additional interest.",
+
+        errorPrincipal:
+            "Please enter a valid principal amount.",
+
+        errorInterest:
+            "Please enter a valid monthly interest amount.",
+
+        errorDates:
+            "Please select both dates.",
+
+        errorDateOrder:
+            "Return date must be after the given date."
+    },
+
+
+    te: {
+        title: "సింపుల్ ఇంట్రెస్ట్ కాలిక్యులేటర్",
+
+        description:
+            "రెండు తేదీల మధ్య పూర్తయిన నెలల ఆధారంగా వడ్డీని లెక్కించండి.",
+
+        principalLabel:
+            "అసలు మొత్తం",
+
+        monthlyInterestLabel:
+            "నెలవారీ వడ్డీ",
+
+        principalPlaceholder:
+            "అసలు మొత్తాన్ని నమోదు చేయండి",
+
+        monthlyInterestPlaceholder:
+            "నెలవారీ వడ్డీని నమోదు చేయండి",
+
+        givenDateLabel:
+            "డబ్బు ఇచ్చిన తేదీ",
+
+        returnDateLabel:
+            "డబ్బు తిరిగి ఇచ్చే తేదీ",
+
+        calculateButton:
+            "లెక్కించండి",
+
+        resetButton:
+            "రీసెట్",
+
+        resultTitle:
+            "ఫలితం",
+
+        durationLabel:
+            "కాల వ్యవధి",
+
+        interestLabel:
+            "వడ్డీ",
+
+        totalLabel:
+            "మొత్తం",
+
+        explanationTitle:
+            "వివరణ",
+
+        actualDays:
+            "నిజమైన గడిచిన రోజులు",
+
+        completedMonths:
+            "పూర్తయిన నెలలు",
+
+        extraDays:
+            "అదనపు రోజులు",
+
+        interestCalculation:
+            "వడ్డీ లెక్కింపు",
+
+        totalCalculation:
+            "మొత్తం లెక్కింపు",
+
+        interestNoteLessThanMonth:
+        "1 పూర్తి నెల కంటే తక్కువ వ్యవధి ఉన్నందున వడ్డీ లెక్కించబడలేదు.",
+
+        interestNoteExtraDays:
+         "పూర్తయిన నెలలకు మాత్రమే వడ్డీ లెక్కించబడుతుంది. అదనపు రోజులకు వడ్డీ ఉండదు.",
+        errorPrincipal:
+            "దయచేసి సరైన అసలు మొత్తాన్ని నమోదు చేయండి.",
+
+        errorInterest:
+            "దయచేసి సరైన నెలవారీ వడ్డీని నమోదు చేయండి.",
+
+        errorDates:
+            "దయచేసి రెండు తేదీలను ఎంచుకోండి.",
+
+        errorDateOrder:
+            "తిరిగి ఇచ్చే తేదీ, ఇచ్చిన తేదీ తర్వాత ఉండాలి."
+    }
+};
+
+
+/* LANGUAGE */
+
+function updateLanguage() {
+
+    const lang = languageSelect.value;
+    const t = translations[lang];
+
+    document.getElementById("title").textContent = t.title;
+    document.getElementById("description").textContent = t.description;
+
+    document.getElementById("principalLabel").textContent =
+        t.principalLabel;
+
+    document.getElementById("monthlyInterestLabel").textContent =
+        t.monthlyInterestLabel;
+
+    document.getElementById("givenDateLabel").textContent =
+        t.givenDateLabel;
+
+    document.getElementById("returnDateLabel").textContent =
+        t.returnDateLabel;
+
+    document.getElementById("calculateButton").textContent =
+        t.calculateButton;
+
+    document.getElementById("resetButton").textContent =
+        t.resetButton;
+
+    document.getElementById("resultTitle").textContent =
+        t.resultTitle;
+
+    document.getElementById("durationLabel").textContent =
+        t.durationLabel;
+
+    document.getElementById("interestLabel").textContent =
+        t.interestLabel;
+
+    document.getElementById("totalLabel").textContent =
+        t.totalLabel;
+
+    document.getElementById("explanationTitle").textContent =
+        t.explanationTitle;
+
+    principalInput.placeholder =
+        t.principalPlaceholder;
+
+    monthlyInterestInput.placeholder =
+        t.monthlyInterestPlaceholder;
+}
+
+
+/* DATE PARSING */
+
+function parseDate(dateString) {
+
+    const parts = dateString.split("-");
+
+    const year = Number(parts[0]);
+    const month = Number(parts[1]) - 1;
+    const day = Number(parts[2]);
+
+    return new Date(Date.UTC(year, month, day));
+}
+
+
+/* DAYS IN MONTH */
+
+function getDaysInMonth(year, month) {
+
+    return new Date(
+        Date.UTC(year, month + 1, 0)
+    ).getUTCDate();
+}
+
+
+/* ADD MONTHS */
+
+function addMonths(date, months) {
+
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth();
+    const day = date.getUTCDate();
+
+    const targetMonth = month + months;
+
+    const targetYear =
+        year + Math.floor(targetMonth / 12);
+
+    const finalMonth =
+        ((targetMonth % 12) + 12) % 12;
+
+    const maximumDay =
+        getDaysInMonth(targetYear, finalMonth);
+
+    const finalDay =
+        Math.min(day, maximumDay);
+
+    return new Date(
+        Date.UTC(
+            targetYear,
+            finalMonth,
+            finalDay
+        )
+    );
+}
+
+
+/* CALENDAR DURATION */
+
+function getCalendarDuration(startDate, endDate) {
+
+    let years =
+        endDate.getUTCFullYear() -
+        startDate.getUTCFullYear();
+
+    let currentDate =
+        new Date(
+            Date.UTC(
+                startDate.getUTCFullYear() + years,
+                startDate.getUTCMonth(),
+                startDate.getUTCDate()
+            )
+        );
+
+    if (currentDate > endDate) {
+
+        years--;
+
+        currentDate =
+            new Date(
+                Date.UTC(
+                    startDate.getUTCFullYear() + years,
+                    startDate.getUTCMonth(),
+                    startDate.getUTCDate()
+                )
+            );
+    }
+
+
+    let months = 0;
+
+    while (months < 12) {
+
+        const nextDate =
+            addMonths(currentDate, 1);
+
+        if (nextDate <= endDate) {
+
+            currentDate = nextDate;
+            months++;
+
+        } else {
+
+            break;
+        }
+    }
+
+
+    const millisecondsPerDay =
+        24 * 60 * 60 * 1000;
+
+    const days =
+        Math.round(
+            (endDate - currentDate) /
+            millisecondsPerDay
+        );
+
+
+    const totalDays =
+        Math.round(
+            (endDate - startDate) /
+            millisecondsPerDay
+        );
+
+
+    return {
+        years,
+        months,
+        days,
+        totalDays
+    };
+}
+
+
+/* FORMAT CURRENCY */
+
+function formatCurrency(amount) {
+
+    return new Intl.NumberFormat("en-IN", {
+        style: "currency",
+        currency: "INR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    }).format(amount);
+}
+
+
+/* CALCULATE */
+
+function calculateInterest() {
+
+    const lang = languageSelect.value;
+    const t = translations[lang];
+
+    errorElement.textContent = "";
+
+    const principal =
+        Number(principalInput.value);
+
+    const monthlyInterest =
+        Number(monthlyInterestInput.value);
+
+
+    if (
+        principalInput.value === "" ||
+        principal <= 0
+    ) {
+
+        showError(t.errorPrincipal);
+        return;
+    }
+
+
+    if (
+        monthlyInterestInput.value === "" ||
+        monthlyInterest < 0
+    ) {
+
+        showError(t.errorInterest);
+        return;
+    }
+
+
+    if (
+        !givenDateInput.value ||
+        !returnDateInput.value
+    ) {
+
+        showError(t.errorDates);
+        return;
+    }
+
+
+    const startDate =
+        parseDate(givenDateInput.value);
+
+    const endDate =
+        parseDate(returnDateInput.value);
+
+
+    if (endDate <= startDate) {
+
+        showError(t.errorDateOrder);
+        return;
+    }
+
+
+    const duration =
+        getCalendarDuration(
+            startDate,
+            endDate
+        );
+
+
+    /*
+        Only completed months generate interest.
+
+        Years are converted to months:
+        1 year = 12 months
+
+        Extra days generate no interest.
+    */
+
+    const completedMonths =
+        (duration.years * 12) +
+        duration.months;
+
+
+    const interest =
+        monthlyInterest *
+        completedMonths;
+
+    if (completedMonths === 0) {
+    interestNoteElement.textContent =
+        t.interestNoteLessThanMonth;
+    } else if (duration.days > 0) {
+    interestNoteElement.textContent =
+        t.interestNoteExtraDays;
+    } else {
+    interestNoteElement.textContent = "";
+    }
+
+
+    const totalAmount =
+        principal +
+        interest;
+
+
+    /* DISPLAY DURATION */
+
+    durationElement.textContent =
+        `${duration.years} Years, ` +
+        `${duration.months} Months, ` +
+        `${duration.days} Days`;
+
+
+    actualDaysElement.textContent =
+        `${t.actualDays}: ${duration.totalDays} | ` +
+        `${t.completedMonths}: ${completedMonths} | ` +
+        `${t.extraDays}: ${duration.days}`;
+
+
+    /* DISPLAY MONEY */
+
+    interestElement.textContent =
+        formatCurrency(interest);
+
+    totalAmountElement.textContent =
+        formatCurrency(totalAmount);
+
+
+    /* EXPLANATION */
+
+    explanationElement.innerHTML = `
+
+        <p>
+            <strong>${t.principalLabel}:</strong>
+            ${formatCurrency(principal)}
+        </p>
+
+        <p>
+            <strong>${t.monthlyInterestLabel}:</strong>
+            ${formatCurrency(monthlyInterest)}
+        </p>
+
+        <p>
+            <strong>${t.durationLabel}:</strong>
+            ${duration.years} Years,
+            ${duration.months} Months,
+            ${duration.days} Days
+        </p>
+
+        <p>
+            <strong>${t.completedMonths}:</strong>
+            ${completedMonths}
+        </p>
+
+        <div class="formula">
+            ${formatCurrency(monthlyInterest)}
+            ×
+            ${completedMonths}
+            =
+            ${formatCurrency(interest)}
+        </div>
+
+        <p>
+            <strong>${t.interestCalculation}:</strong>
+            ${formatCurrency(interest)}
+        </p>
+
+        <div class="formula">
+            ${formatCurrency(principal)}
+            +
+            ${formatCurrency(interest)}
+            =
+            ${formatCurrency(totalAmount)}
+        </div>
+
+        <p>
+            <strong>${t.totalCalculation}:</strong>
+            ${formatCurrency(totalAmount)}
+        </p>
+
+        <p>
+            ${duration.days > 0
+                ? `${duration.days} extra day(s) do not generate additional interest.`
+                : ""
+            }
+        </p>
+    `;
+
+
+    resultArea.classList.remove("hidden");
+    explanationArea.classList.remove("hidden");
+}
+
+
+/* ERROR */
+
+function showError(message) {
+
+    errorElement.textContent = message;
+
+    resultArea.classList.add("hidden");
+    explanationArea.classList.add("hidden");
+}
+
+
+/* RESET */
+
+function resetCalculator() {
+
+    principalInput.value = "";
+    monthlyInterestInput.value = "";
+
+    givenDateInput.value = "";
+    returnDateInput.value = "";
+
+    errorElement.textContent = "";
+
+    durationElement.textContent = "-";
+    actualDaysElement.textContent = "-";
+
+    interestElement.textContent = "₹0.00";
+    totalAmountElement.textContent = "₹0.00";
+    interestNoteElement.textContent = "";
+
+    explanationElement.innerHTML = "";
+
+    resultArea.classList.add("hidden");
+    explanationArea.classList.add("hidden");
+}
+
+
+/* EVENTS */
+
+calculateButton.addEventListener(
+    "click",
+    calculateInterest
+);
+
+resetButton.addEventListener(
+    "click",
+    resetCalculator
+);
+
+languageSelect.addEventListener(
+    "change",
+    updateLanguage
+);
+
+
+/* INITIAL LANGUAGE */
+
+updateLanguage();
+
+
+</script>
+
+</body>
+</html>
+
