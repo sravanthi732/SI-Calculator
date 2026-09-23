@@ -522,6 +522,8 @@ const translations = {
 
         extraDays:
             "Extra days",
+        extraDaysNote:
+         "extra day(s) do not generate additional interest.",
 
         interestCalculation:
             "Interest Calculation",
@@ -594,13 +596,15 @@ const translations = {
             "వివరణ",
 
         actualDays:
-            "నిజమైన గడిచిన రోజులు",
+            "గడిచిన రోజులు",
 
         completedMonths:
             "పూర్తయిన నెలలు",
 
         extraDays:
             "అదనపు రోజులు",
+        extraDaysNote:
+         "అదనపు రోజులకు అదనపు వడ్డీ లెక్కించబడలేదు.",
 
         interestCalculation:
             "వడ్డీ లెక్కింపు",
@@ -612,7 +616,7 @@ const translations = {
         "1 పూర్తి నెల కంటే తక్కువ వ్యవధి ఉన్నందున వడ్డీ లెక్కించబడలేదు.",
 
         interestNoteExtraDays:
-         "పూర్తయిన నెలలకు మాత్రమే వడ్డీ లెక్కించబడుతుంది. అదనపు రోజులకు వడ్డీ ఉండదు.",
+         "పూర్తయిన నెలలకు మాత్రమే వడ్డీ లెక్కించబడుతుంది. అదనపు రోజులకు వడ్డీ లెక్కించబడలేదు.",
         errorPrincipal:
             "దయచేసి సరైన అసలు మొత్తాన్ని నమోదు చేయండి.",
 
@@ -1002,10 +1006,12 @@ function calculateInterest() {
         </p>
 
         <p>
-            ${duration.days > 0
-                ? `${duration.days} extra day(s) do not generate additional interest.`
-                : ""
-            }
+           <p>
+    ${duration.days > 0
+        ? `${duration.days} ${t.extraDaysNote}`
+        : ""
+    }
+    </p>
         </p>
     `;
 
