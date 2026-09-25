@@ -15,7 +15,7 @@
 }
 body {
     font-family: Arial, sans-serif;
-    background: #c4d1eb;
+    background: #e2ebf4;
     color: #222;
     min-height: 100vh;
 }
@@ -300,6 +300,51 @@ button {
         font-size: 14px;
     }
 }
+/* About Calculator */
+#about-calculator {
+    margin: 40px auto 20px;
+    padding: 28px;
+    max-width: auto;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+#about-calculator h2 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 26px;
+}
+
+#about-calculator h3 {
+    margin-top: 24px;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+#about-calculator p {
+    line-height: 1.7;
+    margin-bottom: 18px;
+}
+
+#about-calculator ul {
+    padding-left: 22px;
+    margin: 0;
+}
+
+#about-calculator li {
+    margin-bottom: 14px;
+    line-height: 1.6;
+}
+
+#about-calculator strong {
+    font-weight: 600;
+}
+
+/* Telugu text */
+#about-calculator .lang-te {
+    line-height: 1.8;
+}
     </style>
 </head>
 
@@ -437,6 +482,109 @@ button {
         </div>
 
     </section>
+    <section id="about-calculator">
+
+    <!-- ENGLISH VERSION -->
+    <div class="lang-en">
+
+        <h2>About This Simple Interest Calculator</h2>
+
+        <p>
+            This <strong>Simple Interest Calculator</strong> helps you calculate interest
+            between two dates based on <strong>completed months</strong>. It is designed
+            for situations where interest is agreed as a fixed amount per month rather
+            than as an annual percentage rate.
+        </p>
+
+        <h3>Key Features:</h3>
+
+        <ul>
+            <li>
+                <strong>Completed Month Calculation:</strong>
+                Calculate interest based on the number of completed months between
+                the money given date and money return date.
+            </li>
+
+            <li>
+                <strong>Detailed Timeline:</strong>
+                See the elapsed period in years, months, and remaining days, along
+                with the total number of completed months.
+            </li>
+
+            <li>
+                <strong>Clear Calculation:</strong>
+                The calculator shows the interest and total amount and provides
+                an explanation of how the result was calculated.
+            </li>
+
+            <li>
+                <strong>English and Telugu:</strong>
+                Use the calculator in both English and Telugu for easier understanding.
+            </li>
+
+            <li>
+                <strong>Extra Days Explained:</strong>
+                Remaining days after completed months are displayed separately and
+                do not generate additional interest in this calculation method.
+            </li>
+        </ul>
+
+    </div>
+
+    <!-- TELUGU VERSION -->
+    <div class="lang-te" lang="te">
+
+        <h2>ఈ సింపుల్ ఇంట్రెస్ట్ క్యాలిక్యులేటర్ గురించి</h2>
+
+        <p>
+            ఈ <strong>Simple Interest Calculator</strong> ద్వారా రెండు తేదీల మధ్య
+            పూర్తయిన <strong>నెలల ఆధారంగా వడ్డీని</strong> లెక్కించవచ్చు.
+            వార్షిక శాతం ఆధారంగా కాకుండా, నెలకు ఒక నిర్దిష్ట వడ్డీ మొత్తం
+            నిర్ణయించిన సందర్భాల్లో ఈ లెక్కింపు విధానం ఉపయోగపడుతుంది.
+        </p>
+
+        <h3>ముఖ్యమైన ఫీచర్లు:</h3>
+
+        <ul>
+            <li>
+                <strong>పూర్తయిన నెలల ఆధారంగా లెక్కింపు:</strong>
+                డబ్బు ఇచ్చిన తేదీ మరియు తిరిగి తీసుకునే తేదీ మధ్య పూర్తయిన
+                నెలల సంఖ్య ఆధారంగా వడ్డీని లెక్కిస్తుంది.
+            </li>
+
+            <li>
+                <strong>కాలపరిమితి వివరాలు:</strong>
+                రెండు తేదీల మధ్య ఉన్న కాలాన్ని సంవత్సరాలు, నెలలు మరియు
+                మిగిలిన రోజులుగా చూపిస్తుంది.
+            </li>
+
+            <li>
+                <strong>స్పష్టమైన లెక్కింపు:</strong>
+                వడ్డీ మరియు మొత్తం మొత్తాన్ని చూపిస్తూ, లెక్కింపు ఎలా
+                జరిగిందో సులభంగా వివరిస్తుంది.
+            </li>
+
+            <li>
+                <strong>తెలుగు మరియు ఇంగ్లీష్:</strong>
+                సులభంగా అర్థం చేసుకోవడానికి క్యాలిక్యులేటర్‌ను తెలుగు
+                మరియు ఇంగ్లీష్‌లో ఉపయోగించవచ్చు.
+            </li>
+
+            <li>
+                <strong>మిగిలిన రోజుల వివరణ:</strong>
+                పూర్తయిన నెలల తర్వాత మిగిలిన రోజులను విడిగా చూపిస్తుంది.
+                ఈ లెక్కింపు విధానంలో ఆ అదనపు రోజులకు అదనపు వడ్డీ
+                లెక్కించబడదు.
+            </li>
+        </ul>
+
+    </div>
+
+</section>
+    
+    
+
+
 
 </main>
 
@@ -682,6 +830,15 @@ function updateLanguage() {
 
     monthlyInterestInput.placeholder =
         t.monthlyInterestPlaceholder;
+
+    // Show About section only in the selected language
+document.querySelectorAll("#about-calculator .lang-en").forEach(el => {
+    el.style.display = lang === "en" ? "block" : "none";
+});
+
+document.querySelectorAll("#about-calculator .lang-te").forEach(el => {
+    el.style.display = lang === "te" ? "block" : "none";
+});
 }
 
 
